@@ -1,4 +1,33 @@
-body
+section
 {
-    background: #111;
+    position: relative;
+    width: 100%;
+    min-height: 25vh;
+    margin-top: 100px;
+    padding-right: 100px;
+    padding-left: 100px;
+    padding-bottom: 25px;
+    z-index: -1;
+}
+
+section h2
+{
+    color: #fff;
+    font-size: 4em;
+}
+
+section p
+{
+    font-size: 1.25em;
+}
+
+.donateForm
+{
+    padding-right: 100px;
+    padding-left: 100px;
+    padding-bottom: 100px;
+    color: #fff;
+    font-size: 1.25em;
+    z-index: 9999;
+    position: inherit;
 }

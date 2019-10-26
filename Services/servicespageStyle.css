@@ -1,4 +1,52 @@
-body
+.columns
 {
-    background: #111;
+    /* position: relative; */
+    width: 100%;
+    min-height: 100vh;
+    margin-top: 150px;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 100px;
+    z-index: -1;
 }
+
+    .column
+    {
+        float: left;
+        width: 33%;
+    }
+
+    .column:hover
+    {
+        transition: 0.5s;
+        background: #66fcf1;
+        box-shadow: 0 0 10px #66fcf1, 0 0 40px #66fcf1,0 0 80px #66fcf1;
+    }
+
+    .column:hover > p
+    {
+        transition: color 0.1s;
+        color: #111;
+    }
+
+    .column:hover > h2
+    {
+        transition: color 0.1s;
+        color: #111;
+    }
+
+p
+{
+    font-size: 1.25em;
+    margin-right: 25px;
+    margin-left: 25px;
+    text-align: center;
+}
+
+h2
+{
+    color: #fff;
+    text-align: center;
+}
+
+
