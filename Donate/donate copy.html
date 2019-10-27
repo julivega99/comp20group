@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Donate</title>
+        <link rel="stylesheet" href="donateCSS.css">
+        <link rel="stylesheet" href="../navbar.css">
+    </head>
+    <body>
+        <div class="container">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script type="text/javascript" src="./utils.js"></script>
+            <script type="text/javascript" src="./obs_comp_rollup.js"></script>
+                <nav>
+                    <input type="checkbox" id="nav" class="hidden">
+                        <label for="nav" class="nav-btn">
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                        </label>
+        
+                    <div class="logo">
+                        <a href="../index.html" id="logo_id" >BLUEHAT:DONATE</a>
+                    </div>
+        
+                    <ul class="nav-wrapper">
+                        <li><a href="../About/about.html">About</a></li>
+                        <li><a href="../Services/services.html">Services</a></li>
+                        <li><a href="../Donate/donate.html">Donate</a></li>
+                        <li><a href="../Disclaimer/disclaimer.html">Disclaimer</a></li>
+                        <li><a href="../Contact/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <section>
+                <h2 style="color:#66fcf1">$DONATE</h2>
+                <p>All the money from donations go to a good cause. Every month we choose a differet chearity to donate the money to.<br/>This month it is <strong>Boston's Children Hospital</strong></p>
+            </section>
+
+            <!--When working with forms, make sure it is not within a div that has a z-index of -1. This is done to get the top nav bar working but its causing some transparency issues-->
+            <div class="donateForm">
+                    Name: <input type="text" name="name" id="name" placeholder="Enter your name">
+                    Amount: $<input type="number" name="amount" id="amount" placeholder="Enter your amount of Donation">
+                    
+
+
+                    <div class="payment-type-element-container">
+
+                        <div class="payment-type-selection-container payment-field-container">
+                            <h3>Payment Method:</h3>
+                            <div id="responsive_payment_typepay_typeradio_row" class="form-row">
+
+                                <div class="form-content">
+                                    <div class="payment-type-selections"
+                                        id="responsive_payment_typepay_typeradio_payment_types">
+                                        <span class="internal-payment"><span class="payment-type-option selected"><input
+                                                    type="radio" name="responsive_payment_typepay_typeradio"
+                                                    id="responsive_payment_typepay_typeradiocredit" value="credit"
+                                                    checked="checked"
+                                                    onclick="fire_obs_comp_event('responsive_payment_typepay_typeradio', this);"
+                                                    onkeypress="fire_obs_comp_event('responsive_payment_typepay_typeradio', this);" /><label
+                                                    for="responsive_payment_typepay_typeradiocredit"><a
+                                                        href="javascript:void(0);" class="payment-type-label">Credit
+                                                        Card</a></label>
+                                                <script type="text/javascript">
+                                                    var comp = new ObservableRadioComponent(
+                                                        'responsive_payment_typepay_typeradio', 'name');
+                                                </script><noscript>&nbsp;</noscript>
+                                            </span></span>
+                                        <span class="external-payment"><span class="payment-type-option"><input
+                                                    type="radio" name="responsive_payment_typepay_typeradio"
+                                                    id="responsive_payment_typepay_typeradiopaypal" value="paypal"
+                                                    onclick="fire_obs_comp_event('responsive_payment_typepay_typeradio', this);"
+                                                    onkeypress="fire_obs_comp_event('responsive_payment_typepay_typeradio', this);" /><label
+                                                    for="responsive_payment_typepay_typeradiopaypal"><a
+                                                        href="javascript:void(0);" class="payment-type-label"><img
+                                                            src="../images/payment/paypal-logo.png"
+                                                            alt="Pay with Paypal" /></a></label>
+                                                <script type="text/javascript">
+                                                    var comp = new ObservableRadioComponent(
+                                                        'responsive_payment_typepay_typeradio', 'name');
+                                                </script><noscript>&nbsp;</noscript>
+                                            </span></span>
+                                    </div>
+                                    <input type="hidden" name="responsive_payment_typepay_typeradiosubmit"
+                                        id="responsive_payment_typepay_typeradiosubmit" value="true" />
+                                    <script type="text/javascript">
+                                        // Y.use("jquery-ui", function (Y) {
+                                            jQuery(function () {
+                                                // subscribe observable for payment type options
+                                                jQuery('.payment-type-option').each(function () {
+                                                    var syncAction = function (obj) {
+                                                        if (obj.hasClass('selected')) {
+                                                            var radioGroupName = obj.find(
+                                                                'input').attr('name');
+                                                            obj.find('input').attr(
+                                                                'checked', true);
+                                                            fire_obs_comp_event(
+                                                                radioGroupName, obj
+                                                                .find('input').get());
+                                                        }
+                                                        return arguments.callee;
+                                                    }(jQuery(this));
+                                                    jQuery(this).click(function () {
+                                                        jQuery('.payment-type-option')
+                                                            .removeClass('selected');
+                                                        jQuery(this).addClass(
+                                                            'selected');
+                                                        syncAction(jQuery(this));
+                                                        var selectedValue = jQuery(this)
+                                                            .find('input').val();
+                                                        if (selectedValue == 'paypal' ||
+                                                            selectedValue == 'amazon') {
+                                                            // open up a boxinator dialog
+                                                            jQuery(document).trigger(
+                                                                'redirect-external');
+                                                            jQuery('#btn_next').click();
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        // });
+                                        var comp = new ObservableRadioComponent('responsive_payment_typepay_typeradio',
+                                            'name');
+                                        comp.hide = function (_hidden) {
+                                            var _display = _hidden ? 'none' : '';
+                                            set_display('responsive_payment_typepay_typeradio_row', _display);
+                                            this.disable_submit_flag(_hidden);
+                                        }
+                                    </script><noscript>&nbsp;</noscript>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div id="payment_cc_container" class="payment-field-container">
+                            <h3>Credit Card Information:</h3>
+                            <div id="responsive_payment_typecc_type_row" class="form-row form-radio-array">
+
+                                <div class="form-content">
+                                    <fieldset>
+                                        <legend>Credit Card Type:</legend>
+                                        <ul class="radio-array-list">
+                                            <li class="tender-row ">
+                                                <img src="../images/visa_small.gif" alt="Visa"
+                                                    name="responsive_payment_typecc_type_Visa"
+                                                    id="responsive_payment_typecc_type_Visa" />
+                                            </li>
+                                            <li class="tender-row ">
+                                                <img src="../images/discovercard_sm.gif" alt="Discover"
+                                                    name="responsive_payment_typecc_type_Discover"
+                                                    id="responsive_payment_typecc_type_Discover" />
+                                            </li>
+                                            <li class="tender-row ">
+                                                <img src="../images/amex_small.gif" alt="American Express"
+                                                    name="responsive_payment_typecc_type_American_Express"
+                                                    id="responsive_payment_typecc_type_American_Express" />
+                                            </li>
+                                            <li class="tender-row ">
+                                                <img src="../images/mastercd_small.gif" alt="MasterCard"
+                                                    name="responsive_payment_typecc_type_MasterCard"
+                                                    id="responsive_payment_typecc_type_MasterCard" />
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+                                    <input type="hidden" name="responsive_payment_typecc_typesubmit"
+                                        id="responsive_payment_typecc_typesubmit" value="true" />
+                                    <script type="text/javascript">
+                                        var comp = new ObservableRadioComponent('responsive_payment_typecc_type',
+                                            'name');
+                                        comp.hide = function (_hidden) {
+                                            var _display = _hidden ? 'none' : '';
+                                            set_display('responsive_payment_typecc_type_row', _display);
+                                            this.disable_submit_flag(_hidden);
+                                        }
+                                    </script><noscript>&nbsp;</noscript>
+                                </div>
+                            </div>
+                            <div id="responsive_payment_typecc_number_row" class="form-row form-text">
+
+                                <div class="form-content">
+                                    <span class="field-required"></span>
+                                    <label for="responsive_payment_typecc_numbername">Credit Card Number:</label>
+
+                                    <input type="text" name="responsive_payment_typecc_numbername"
+                                        id="responsive_payment_typecc_numbername" value="" maxlength="22"
+                                        autocomplete="off" />
+
+                                    <input type="hidden" name="responsive_payment_typecc_numbersubmit"
+                                        id="responsive_payment_typecc_numbersubmit" value="true" />
+                                    <script type="text/javascript">
+                                        var comp = new ObservableComponent('responsive_payment_typecc_number', 'name');
+                                        comp.hide = function (_hidden) {
+                                            var _display = _hidden ? 'none' : '';
+                                            set_display('responsive_payment_typecc_number_row', _display);
+                                            this.disable_submit_flag(_hidden);
+                                        }
+
+
+                                        observe_component('null', new ComponentDisplayer(
+                                            'responsive_payment_typecc_number'));
+                                    </script><noscript>&nbsp;</noscript>
+                                </div>
+                            </div>
+                            <div id="responsive_payment_typecc_exp_date_row" class="form-row form-date">
+
+                                <div class="form-content">
+                                    <span class="field-required"></span>
+                                    <label for="responsive_payment_typecc_exp_date_MONTH">
+                                        <span class="label-text">Expiration Date:</span><span class="aural-only">Select
+                                            month of credit card</span>
+                                    </label>
+                                    <label for="responsive_payment_typecc_exp_date_YEAR"><span class="aural-only">Select
+                                            Expiration Year</span></label>
+                                    <div class="date-input-container">
+
+                                        <fieldset class="cardExpGroup">
+                                            <select name="responsive_payment_typecc_exp_date_MONTH"
+                                                id="responsive_payment_typecc_exp_date_MONTH"
+                                                onChange="fire_obs_comp_event('responsive_payment_typecc_exp_date_MONTH', this)">
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                                <option value="6">06</option>
+                                                <option value="7">07</option>
+                                                <option value="8">08</option>
+                                                <option value="9">09</option>
+                                                <option value="10" selected="selected">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                            <select name="responsive_payment_typecc_exp_date_YEAR"
+                                                id="responsive_payment_typecc_exp_date_YEAR"
+                                                onChange="fire_obs_comp_event('responsive_payment_typecc_exp_date_YEAR', this)">
+                                                <option value="2019" selected="selected">2019</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2025">2025</option>
+                                                <option value="2026">2026</option>
+                                                <option value="2027">2027</option>
+                                                <option value="2028">2028</option>
+                                                <option value="2029">2029</option>
+
+                                            </select>
+                                        </fieldset>
+                                        <input type="hidden" name="responsive_payment_typecc_exp_date_DAY"
+                                            id="responsive_payment_typecc_exp_date_DAY" value="1" />
+                                        <script type="text/javascript">
+                                            var comp1 = new ObservableComponent(
+                                                'responsive_payment_typecc_exp_date_MONTH', '');
+                                            comp1.hide = function (_hidden) {
+                                                var _display = _hidden ? 'none' : '';
+                                                set_display('responsive_payment_typecc_exp_date_Row', _display);
+                                                this.disable_submit_flag(_hidden);
+                                            }
+                                            var comp2 = new ObservableComponent(
+                                                'responsive_payment_typecc_exp_date_YEAR', '');
+                                            comp2.hide = function (_hidden) {
+                                                var _display = _hidden ? 'none' : '';
+                                                set_display('responsive_payment_typecc_exp_date_Row', _display);
+                                                this.disable_submit_flag(_hidden);
+                                            }
+                                        </script><noscript>&nbsp;</noscript>
+                                    </div>
+                                    <input type="hidden" name="responsive_payment_typecc_exp_datesubmit"
+                                        id="responsive_payment_typecc_exp_datesubmit" value="true" />
+                                    <script type="text/javascript">
+                                        var comp = new ObservableComponent('responsive_payment_typecc_exp_date',
+                                            'input');
+                                        comp.hide = function (_hidden) {
+                                            var _display = _hidden ? 'none' : '';
+                                            set_display('responsive_payment_typecc_exp_date_row', _display);
+                                            disable_submit_flag('responsive_payment_typecc_exp_datesubmit',
+                                            _hidden);
+                                        }
+                                        comp.disable = function (_disabled) {
+                                            disable_element('responsive_payment_typecc_exp_date_MONTH', _disabled);
+                                            disable_element('responsive_payment_typecc_exp_date_DAY', _disabled);
+                                            disable_element('responsive_payment_typecc_exp_date_YEAR', _disabled);
+                                            disable_element('responsive_payment_typecc_exp_date_HOUR12', _disabled);
+                                            disable_element('responsive_payment_typecc_exp_date_HOUR24',
+                                            _disabled); //For UK, 24 hour clock used
+                                            disable_element('responsive_payment_typecc_exp_date_MINUTE', _disabled);
+                                            disable_element('responsive_payment_typecc_exp_date_AMPM', _disabled);
+                                        }
+                                    </script><noscript>&nbsp;</noscript>
+                                </div>
+                            </div>
+
+                            <div id="responsive_payment_typecc_cvv_row" class="form-row form-text cvv-input">
+
+                                <div class="form-content">
+                                    <span class="field-required"></span>
+                                    <label for="responsive_payment_typecc_cvvname">
+                                        <span class="FormLabelText">CVV Number:</span>
+                                    </label>
+                                    <a href="http://help.convio.net/site/PageServer?s_site=chbc&pagename=user_donation_cvv"
+                                        class="HelpLink" title="What is this? Opens new window.">What is this?</a>
+                                    <input type="text" name="responsive_payment_typecc_cvvname"
+                                        id="responsive_payment_typecc_cvvname" value="" maxlength="4"
+                                        autocomplete="off" />
+                                    <input type="hidden" name="responsive_payment_typecc_cvvsubmit"
+                                        id="responsive_payment_typecc_cvvsubmit" value="true" />
+                                    <script type="text/javascript">
+                                        var comp = new ObservableComponent('responsive_payment_typecc_cvv', 'name');
+                                        comp.hide = function (_hidden) {
+                                            var _display = _hidden ? 'none' : '';
+                                            set_display('responsive_payment_typecc_cvv_row', _display);
+                                            this.disable_submit_flag(_hidden);
+                                        }
+                                    </script><noscript>&nbsp;</noscript>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div id="payment_check_container" class="payment-field-container">
+                            <h3>Check Information</h3>
+
+                        </div>
+
+                        <input type="hidden" name="responsive_payment_typesubmit" id="responsive_payment_typesubmit"
+                            value="true" />
+                        <script type="text/javascript">
+                            function PaymentObserver() {
+                                this.observe = function (_event) {
+                                    var sVal = _event.component.get();
+                                    switch (sVal) {
+                                        case 'check':
+                                            hide_element('payment_cc_container');
+                                            hide_element('payment_bank_container');
+                                            show_element('payment_check_container');
+                                            break;
+                                        case 'credit':
+                                            hide_element('payment_bank_container');
+                                            hide_element('payment_check_container');
+                                            show_element('payment_cc_container');
+                                            break;
+                                        case 'ach':
+                                            hide_element('payment_cc_container');
+                                            hide_element('payment_check_container');
+                                            show_element('payment_bank_container');
+                                            break;
+                                        case 'paypal':
+                                        case 'amazon':
+                                        case 'mobilepay':
+                                        default:
+                                            // hide all
+                                            hide_element('payment_bank_container');
+                                            hide_element('payment_cc_container');
+                                            hide_element('payment_check_container');
+                                            break;
+                                    }
+                                }
+                            }
+                            // Set the observer to show/hide the relevant fields
+                            observe_component('responsive_payment_typepay_typeradio', new PaymentObserver());
+                        </script><noscript>&nbsp;</noscript>
+                    </div>
+            </div>                
+    </body>
+</html>
