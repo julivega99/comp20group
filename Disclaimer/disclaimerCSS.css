@@ -1,6 +1,7 @@
 body
 {
     background: #111;
+    color: #fff;
 }
 
 section
@@ -18,4 +19,15 @@ section h2
 {
     color: #fff;
     font-size: 4em;
+}
+h3 {
+    color: #66fcf1;
+    font-size: 200%;
+}
+
+label{
+    color: #45a29e;
+}
+summary{
+    color: #66fcf1;
 }

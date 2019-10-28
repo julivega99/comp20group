@@ -40,3 +40,15 @@ input, select{
     padding: 2px;
     border-radius: 5px;
 }
+.glow{
+    text-decoration: none;
+    color: inherit;
+}
+.glow:hover{
+    transition: color 0.7s;
+    color: #111;
+    background: #66fcf1;
+    box-shadow: 0 0 10px #66fcf1,
+    0 0 40px #66fcf1,
+    0 0 80px #66fcf1;
+}
