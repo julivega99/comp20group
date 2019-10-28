@@ -1,0 +1,113 @@
+section
+{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    margin-top: 100px;
+    padding-right: 100px;
+    padding-left: 100px;
+    padding-bottom: 100px;
+    z-index: -1;
+}
+
+section h2
+{
+    color: #fff;
+    font-size: 4em;
+}
+
+section p
+{
+    font-size: 1.25em;
+}
+
+.columns
+{
+    /* position: relative; */
+    width: 100%;
+    min-height: 100vh;
+    margin-top: 150px;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 100px;
+    z-index: -1;
+}
+
+    .column
+    {
+        float: left;
+        width: 50%;
+        border-radius: 12px
+    }
+    .column2
+    {
+        float: left;
+        width: 25%;
+        border-radius: 12px
+    }
+
+
+p
+{
+    font-size: 1.25em;
+    margin-right: 25px;
+    margin-left: 25px;
+    text-align: center;
+}
+
+h2
+{
+    color: #fff;
+    text-align: center;
+}
+
+.columns img{
+    width: inherit;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+}
+
+.btn {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 12px;
+  color: #66fcf1;
+  text-align: center;
+}
+.columns .btn{
+    border: none;
+    width: inherit;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: #66fcf1;
+    text-align: center;
+
+}
+
+.btn:hover {
+
+    transition: 0.5s;
+    background: #45a29e;
+    box-shadow: 0 0 10px #45a29e, 0 0 40px #45a29e,0 0 80px #66fcf1;
+}
+
+img:hover {
+
+    transition: 0.5s;
+    background: #45a29e;
+    box-shadow: 0 0 10px #45a29e, 0 0 40px #45a29e,0 0 80px #66fcf1;
+}
+
+.services
+{
+    color: black
+}
+
+
