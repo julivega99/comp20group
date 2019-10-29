@@ -23,6 +23,9 @@ section p
 body{
     color: #fff;
 }
+td{
+    padding-right: 5px;
+}
 .donateForm
 {
     padding-right: 100px;
