@@ -28,7 +28,6 @@ section h3
 }
 
 section form {
-    display: flex;
     color: #ffff;
     background-color: rgb(102, 252, 241, 0.5);
     border-radius: 10px;
