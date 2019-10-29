@@ -51,3 +51,9 @@ section p
     line-height: 1.6;
     color: #ffff;
 }
+
+#input
+{
+    width: 50%;
+    height: 2.5em;
+}
