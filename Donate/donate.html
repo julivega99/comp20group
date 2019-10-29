@@ -12,115 +12,241 @@
     <body>
         <div class="container">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script>
+            <script type="text/javascript">
                 function donate(){
-                    alert("Thank you "+document.forms[0].name.value+" for your generous donation to Boston Children's Hospital.\nWe promise to put it to good use.");
+                    if(!checkAmount() && !checkCN() && !checkName() && !checkCVV())
+                        alert("Thank you "+document.forms[0].name.value+" for your generous donation to Boston Children's Hospital.\nWe promise to put it to good use.");
+                    else{
+                        checkAH();
+                        checkCNH();
+                        checkCVVH();
+                        checkNH();
+                        alert("Please resolve the Errors");
+                    }
                     return false;
                 }
+                function checkNH(){
+                    if(checkName()){
+                        $("#nameErr").show();
+                    }
+                    else{
+                        $("#nameErr").hide();
+                    }
+                }
+                function checkName(){
+                    if($("#name").val()==""){
+                        return true;
+                    }
+                    else{
+                        const nameValue=$("#name").val();
+                        for(var i=0; i<nameValue.length;i++){
+                            if(!((nameValue[i].charCodeAt(0) >= 65 && nameValue[i].charCodeAt(0) <= 90) ||
+                                (nameValue[i].charCodeAt(0) >= 95 && nameValue[i].charCodeAt(0) <= 122) ||
+                                    nameValue[i].charCodeAt(0) == 32 )){
+                                return true
+                            }
+                        }
+                    }
+                    return false
+                }
+                function checkAH(){
+                    if(checkAmount()){
+                        $("#amountErr").show();
+                    }
+                    else{
+                        $("#amountErr").hide();
+                    }
+                }
+                function checkAmount(){
+                    if($("#amount").val().length==0){
+                        return true;
+                    }
+                    return false;
+                }
+                function checkCNH(){
+                    if(checkCN()){
+                        $("#cardNumberErr").show();
+                    }
+                    else{
+                        $("#cardNumberErr").hide();
+                    }
+                }
+                function checkCN(){
+                    if($("#cardNumber").val().length!=16){
+                        return true;
+                    }
+                    else{
+                        for(var i=0; i<CardNumberValue.length; i++){
+                            console.log(CardNumberValue[i].charCodeAt(0));
+                            if(!(CardNumberValue[i].charCodeAt(0) >= 48 && CardNumberValue[i].charCodeAt(0) <= 57)){
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+                function checkCVVH(){
+                    if(checkCVV()){
+                        $("#CVVErr").show();
+                    }
+                    else{
+                        $("#CVVErr").hide();
+                    }
+                }
+                function checkCVV(){
+                    if($("#cvvNumber").val().length<3){
+                        return true;
+                    }
+                    else{
+                        const CVVValue=$("#cvvNumber").val();
+                        for(var i=0; i<CVVValue.length; i++){
+                            if(!(CVVValue[i].charCodeAt(0) >= 48 && CVVValue[i].charCodeAt(0) <= 57)){
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+                $(document).ready(function() {
+                    $('#name').mouseout(checkNH);
+                    $('#name').keyup(checkNH);
+                    $('#amount').mouseout(checkAH);
+                    $('#amount').keyup(checkAH);
+                    $('#cardNumber').mouseout(checkCNH);
+                    $('#cardNumber').keyup(checkCNH);
+                    $('#cvvNumber').mouseout(checkCVVH);
+                    $('#cvvNumber').keyup(checkCVVH);
+                });
             </script>
-                <nav>
-                    <input type="checkbox" id="nav" class="hidden">
-                        <label for="nav" class="nav-btn">
-                            <i></i>
-                            <i></i>
-                            <i></i>
-                        </label>
-        
-                    <div class="logo">
-                        <a href="../index.html" id="logo_id" >BLUEHAT:DONATE</a>
-                    </div>
-        
-                    <ul class="nav-wrapper">
-                        <li><a href="../About/about.html">About</a></li>
-                        <li><a href="../Services/services.html">Services</a></li>
-                        <li><a href="../Donate/donate.html">Donate</a></li>
-                        <li><a href="../Disclaimer/disclaimer.html">Disclaimer</a></li>
-                        <li><a href="../Contact/contact.html">Contact</a></li>
-                    </ul>
-                </nav>
+                <div class="container">
+                    <nav>
+                        <input type="checkbox" id="nav" class="hidden">
+                            <label for="nav" class="nav-btn">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </label>
+            
+                        <div class="logo">
+                            <a href="../index.html" id="logo_id" >BLUEHAT:DONATE</a>
+                        </div>
+            
+                        <ul class="nav-wrapper">
+                            <li><a href="../About/about.html">About</a></li>
+                            <li><a href="../Services/services.html">Services</a></li>
+                            <li><a href="../Donate/donate.html">Donate</a></li>
+                            <li><a href="../Disclaimer/disclaimer.html">Disclaimer</a></li>
+                            <li><a href="../Contact/contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
             <section>
                 <h2 style="color:#66fcf1">$DONATE</h2>
                 <p>All the money from donations go to a good cause. Every month we choose a differet chearity to donate
-                    the money to.<br />This month it is <a class="glow" href="http://www.childrenshospital.org/">Boston Children's
-                        Hospital</a></p>
+                    the money to.<br>
+                    This month it is <a class="glow" href="http://www.childrenshospital.org/">Boston Children's Hospital</a><br>
+                    <br>
+                    Your donation supports the #1 children's hospital in the nation. Boston
+                    Children's offers more breadth and depth of expertise than any other pediatric hospital—it's why
+                    families travel from more than 100 countries to receive care here. And research discoveries made
+                    at Boston Children's—the world's largest research center at a pediatric hospital—are shared
+                    around the globe, improving the lives of both children and adults.<br>
+                    <br>
+                    Did you know? Boston Children's researchers have made many groundbreaking discoveries over the
+                    years, like the vaccine for measles in the early 1960s.</p>
             </section>
 
             <!--When working with forms, make sure it is not within a div that has a z-index of -1. This is done to get the top nav bar working but its causing some transparency issues-->
-            <form class="donateForm" onsubmit="donate(); return false" action="#">
-                <table>
-                    <tr>
-                        <td>
-                            Name: 
-                        </td>
-                        <td>
-                            <input type="text" name="name" id="name" placeholder="Your name">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Amount: <span style="float: right;">$</span>
-                        </td>
-                        <td>
-                            <input type="number" name="amount" id="amount" placeholder="Amount of Donation">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Card Number:
-                        </td>
-                        <td>
-                            <input type="number" name="cardNumber" id="cardNumber" placeholder="Card Number">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Expiration Date:
-                        </td>
-                        <td>
-                            <div class="date-input-container">
-                                <select name="exp_date_MONTH" id="exp_date_MONTH">
-                                    <option value="1">01</option>
-                                    <option value="2">02</option>
-                                    <option value="3">03</option>
-                                    <option value="4">04</option>
-                                    <option value="5">05</option>
-                                    <option value="6">06</option>
-                                    <option value="7">07</option>
-                                    <option value="8">08</option>
-                                    <option value="9">09</option>
-                                    <option value="10" selected="selected">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
-                                <select name="exp_date_YEAR" id="exp_date_YEAR">
-                                    <option value="2019" selected="selected">2019</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2023</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
-                                    <option value="2027">2027</option>
-                                    <option value="2028">2028</option>
-                                    <option value="2029">2029</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            CVV Number:
-                        </td>
-                        <td>
-                            <input type="text" name="cvvname" id="cvvname" value="" maxlength="4" autocomplete="off"
-                                placeholder="CVV Number" />
-                        </td>
-                    </tr>
-                </table>
-                <br>
-                <input type="submit" name="responsive_payment_typesubmit" id="responsive_payment_typesubmit" value="" style="border-radius: 10px ; background-image: url(./btn_donateCC_LG.gif); background-color: #000; width: 92px; height: 47px; border: none;" onclick="false"/>
-            </form>
+            <section>
+                <form class="donateForm" onsubmit="donate(); return false" action="#">
+                    <table>
+                        <tr>
+                            <td>
+                                Name: 
+                            </td>
+                            <td>
+                                <input type="text" name="name" id="name" placeholder="Your name">
+                            </td>
+                            <td>
+                                <p style="font-size: 8pt;color: #f00;" id="nameErr" hidden>* Name is required and can only contain letters.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Amount: <span style="float: right;">$</span>
+                            </td>
+                            <td>
+                                <input type="number" name="amount" id="amount" placeholder="Amount of Donation" min="0">
+                            </td>
+                            <td>
+                                <p style="font-size: 8pt;color: #f00;" id="amountErr" hidden>* Amount cannot be empty</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Card Number:
+                            </td>
+                            <td>
+                                <input type="text" name="cardNumber" id="cardNumber" placeholder="Card Number" min="0"
+                                    minlength="16" maxlength="16" style="-moz-appearance: textfield">
+                            </td>
+                            <td>
+                                <p style="font-size: 8pt;color: #f00;" id="cardNumberErr" hidden>* Card Number is required and can only contain numbers.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Expiration Date:
+                            </td>
+                            <td>
+                                <div class="date-input-container">
+                                    <select name="exp_date_MONTH" id="exp_date_MONTH">
+                                        <option value="1">01</option>
+                                        <option value="2">02</option>
+                                        <option value="3">03</option>
+                                        <option value="4">04</option>
+                                        <option value="5">05</option>
+                                        <option value="6">06</option>
+                                        <option value="7">07</option>
+                                        <option value="8">08</option>
+                                        <option value="9">09</option>
+                                        <option value="10" selected="selected">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    <select name="exp_date_YEAR" id="exp_date_YEAR">
+                                        <option value="2019" selected="selected">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                CVV Number:
+                            </td>
+                            <td>
+                                <input type="text" name="cvvNumber" id="cvvNumber" value="" maxlength="4" autocomplete="off"
+                                    placeholder="CVV Number" />
+                            </td>
+                            <td>
+                                <p style="font-size: 8pt;color: #f00;" id="CVVErr" hidden>* CVV is required and can only contain numbers.</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <input type="submit" name="responsive_payment_typesubmit" id="responsive_payment_typesubmit" value="" style="border-radius: 10px ; background-image: url(./btn_donateCC_LG.gif); background-color: #000; width: 92px; height: 47px; border: none;" onclick="false"/>
+                </form>
+            </section>
         </div>
     </body>
 </html>
