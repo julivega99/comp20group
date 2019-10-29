@@ -29,7 +29,7 @@ section h3
 
 section form {
     color: #ffff;
-    background-color: rgb(102, 252, 241, 0.5);
+    background-color: rgba(102, 252, 241, 0.5);
     border-radius: 10px;
     max-width: 60%;
     height: auto;
@@ -56,4 +56,31 @@ section p
 {
     width: 50%;
     height: 2.5em;
+}
+
+#submitButton
+{
+    float: right;
+    padding: 10px 20px 11px !important;
+    font-size: 21px !important;
+    background-color: #2f7a75;
+    font-weight: bold;
+    text-shadow: 1px 1px #0005a3;
+    color: #ffffff;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border: 2px solid #2f7a75;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(102, 252, 241, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(102, 252, 241, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(102, 252, 241, 0.5) inset;
+}
+
+#submitButton:hover
+{
+    transition: color 0.7s;
+    color: #111;
+    background: #66fcf1;
+    box-shadow: 0 0 10px #66fcf1, 0 0 40px #66fcf1,0 0 80px #66fcf1;
 }
