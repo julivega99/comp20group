@@ -28,8 +28,22 @@ section h3
 }
 
 section form {
-    color: #66fcf1;
-    font-family: 
+    display: flex;
+    color: #ffff;
+    background-color: rgb(102, 252, 241, 0.5);
+    border-radius: 10px;
+    max-width: 60%;
+    height: auto;
+    width: 500px;
+    padding: 20px;
+    font-size: 1.7em;
+    line-height: 2em;
+
+}
+
+section form input 
+{
+    display: inline-block;
 }
 
 section p
