@@ -12,11 +12,111 @@
     <body>
         <div class="container">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script>
+            <script type="text/javascript">
                 function donate(){
-                    alert("Thank you "+document.forms[0].name.value+" for your generous donation to Boston Children's Hospital.\nWe promise to put it to good use.");
+                    if(!checkAmount() && !checkCN() && !checkName() && !checkCVV())
+                        alert("Thank you "+document.forms[0].name.value+" for your generous donation to Boston Children's Hospital.\nWe promise to put it to good use.");
+                    else{
+                        checkAH();
+                        checkCNH();
+                        checkCVVH();
+                        checkNH();
+                        alert("Please resolve the Errors");
+                    }
                     return false;
                 }
+                function checkNH(){
+                    if(checkName()){
+                        $("#nameErr").show();
+                    }
+                    else{
+                        $("#nameErr").hide();
+                    }
+                }
+                function checkName(){
+                    if($("#name").val()==""){
+                        return true;
+                    }
+                    else{
+                        const nameValue=$("#name").val();
+                        for(var i=0; i<nameValue.length;i++){
+                            if(!((nameValue[i].charCodeAt(0) >= 65 && nameValue[i].charCodeAt(0) <= 90) ||
+                                (nameValue[i].charCodeAt(0) >= 95 && nameValue[i].charCodeAt(0) <= 122) ||
+                                    nameValue[i].charCodeAt(0) == 32 )){
+                                return true
+                            }
+                        }
+                    }
+                    return false
+                }
+                function checkAH(){
+                    if(checkAmount()){
+                        $("#amountErr").show();
+                    }
+                    else{
+                        $("#amountErr").hide();
+                    }
+                }
+                function checkAmount(){
+                    if($("#amount").val().length==0){
+                        return true;
+                    }
+                    return false;
+                }
+                function checkCNH(){
+                    if(checkCN()){
+                        $("#cardNumberErr").show();
+                    }
+                    else{
+                        $("#cardNumberErr").hide();
+                    }
+                }
+                function checkCN(){
+                    if($("#cardNumber").val().length!=16){
+                        return true;
+                    }
+                    else{
+                        for(var i=0; i<CardNumberValue.length; i++){
+                            console.log(CardNumberValue[i].charCodeAt(0));
+                            if(!(CardNumberValue[i].charCodeAt(0) >= 48 && CardNumberValue[i].charCodeAt(0) <= 57)){
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+                function checkCVVH(){
+                    if(checkCVV()){
+                        $("#CVVErr").show();
+                    }
+                    else{
+                        $("#CVVErr").hide();
+                    }
+                }
+                function checkCVV(){
+                    if($("#cvvNumber").val().length<3){
+                        return true;
+                    }
+                    else{
+                        const CVVValue=$("#cvvNumber").val();
+                        for(var i=0; i<CVVValue.length; i++){
+                            if(!(CVVValue[i].charCodeAt(0) >= 48 && CVVValue[i].charCodeAt(0) <= 57)){
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+                $(document).ready(function() {
+                    $('#name').mouseout(checkNH);
+                    $('#name').keyup(checkNH);
+                    $('#amount').mouseout(checkAH);
+                    $('#amount').keyup(checkAH);
+                    $('#cardNumber').mouseout(checkCNH);
+                    $('#cardNumber').keyup(checkCNH);
+                    $('#cvvNumber').mouseout(checkCVVH);
+                    $('#cvvNumber').keyup(checkCVVH);
+                });
             </script>
                 <div class="container">
                     <nav>
@@ -67,6 +167,9 @@
                             <td>
                                 <input type="text" name="name" id="name" placeholder="Your name">
                             </td>
+                            <td>
+                                <p style="font-size: 8pt;color: #f00;" id="nameErr" hidden>* Name is required and can only contain letters.</p>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -75,13 +178,20 @@
                             <td>
                                 <input type="number" name="amount" id="amount" placeholder="Amount of Donation" min="0">
                             </td>
+                            <td>
+                                <p style="font-size: 8pt;color: #f00;" id="amountErr" hidden>* Amount cannot be empty</p>
+                            </td>
                         </tr>
                         <tr>
                             <td>
                                 Card Number:
                             </td>
                             <td>
-                                <input type="number" name="cardNumber" id="cardNumber" placeholder="Card Number" min="0" minlength="16" maxlength="16">
+                                <input type="text" name="cardNumber" id="cardNumber" placeholder="Card Number" min="0"
+                                    minlength="16" maxlength="16" style="-moz-appearance: textfield">
+                            </td>
+                            <td>
+                                <p style="font-size: 8pt;color: #f00;" id="cardNumberErr" hidden>* Card Number is required and can only contain numbers.</p>
                             </td>
                         </tr>
                         <tr>
@@ -125,8 +235,11 @@
                                 CVV Number:
                             </td>
                             <td>
-                                <input type="text" name="cvvname" id="cvvname" value="" maxlength="4" autocomplete="off"
+                                <input type="text" name="cvvNumber" id="cvvNumber" value="" maxlength="4" autocomplete="off"
                                     placeholder="CVV Number" />
+                            </td>
+                            <td>
+                                <p style="font-size: 8pt;color: #f00;" id="CVVErr" hidden>* CVV is required and can only contain numbers.</p>
                             </td>
                         </tr>
                     </table>
